@@ -1,0 +1,27 @@
+# env file
+.env
+
+# Virtualenv
+venv/
+
+# VSCode files
+.vscode/
+
+# pycache
+__pycache__/
+
+# audio files
+audio/
+*.wav
+
+# logs
+*.log
+
+# csv files
+/*.csv
+
+# notebooks
+.ipynb_checkpoints
+
+# test scripts
+test_scripts.py
