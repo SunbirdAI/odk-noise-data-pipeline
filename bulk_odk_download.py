@@ -64,13 +64,13 @@ def get_submissions():
     logger.info(csv_url)
 
     try:
-        data_response = requests.get(csv_url, headers=headers, params={'attachments': 'false'})
+        data_response = requests.get(csv_url, headers=headers, params={'attachments': 'true'})
         if data_response.status_code != 200:
-            logger.error(f'Error fetching csv: {csv_response.text}')
+            logger.error(f'Error fetching data: {data_response.text}')
         logger.info('Media and csv zip response fetched')
         save_dataset(data_response)
     except requests.exceptions.RequestException as err:
-        logger.error(f'Error fetching csv: {err}')
+        logger.error(f'Error fetching data: {err}')
 
 
 if __name__=='__main__':
