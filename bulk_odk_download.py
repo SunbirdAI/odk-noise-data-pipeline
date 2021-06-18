@@ -38,8 +38,8 @@ def authenticate():
     return response.json()['token']
 
 def save_dataset(data_response):
+    Path('data').mkdir(exist_ok=True)
     dataset_file = Path('data/dataset.zip')
-    dataset_file.touch(exist_ok=True)
 
     with open(dataset_file, 'wb') as f:
         f.write(data_response.content)
