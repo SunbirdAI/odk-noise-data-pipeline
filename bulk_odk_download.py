@@ -62,9 +62,13 @@ def get_submissions():
     # get ODK form submissions csv
     csv_url = f'{base_url}v1/projects/{service_params["projectId"]}/forms/{service_params["xmlFormId"]}/submissions.csv.zip'
     logger.info(csv_url)
+    params = {
+        'attachments': 'true',
+        '$filter': '__system/submissionDate le 2021-03-12'
+    }
 
     try:
-        data_response = requests.get(csv_url, headers=headers, params={'attachments': 'true'})
+        data_response = requests.get(csv_url, headers=headers, params=params)
         if data_response.status_code != 200:
             logger.error(f'Error fetching data: {data_response.text}')
         logger.info('Media and csv zip response fetched')
