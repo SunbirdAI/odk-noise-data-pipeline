@@ -37,6 +37,13 @@ def authenticate():
     logger.info('Authenticated')
     return response.json()['token']
 
+def save_dataset(data_response):
+    dataset_file = Path('data/dataset.zip')
+    dataset_file.touch(exist_ok=True)
+
+    with open(dataset_file, 'wb') as f:
+        f.write(data_response.content)
+
 def get_submissions():
     token = authenticate()
     headers = {'Authorization': f'Bearer {token}'}
@@ -57,12 +64,14 @@ def get_submissions():
     logger.info(csv_url)
 
     try:
-        csv_response = requests.get(csv_url, headers=headers)
-        if csv_response.status_code != 200:
+        data_response = requests.get(csv_url, headers=headers, params={'attachments': 'false'})
+        if data_response.status_code != 200:
             logger.error(f'Error fetching csv: {csv_response.text}')
-        logger.info('Csv/media response fetched')
+        logger.info('Media and csv zip response fetched')
+        save_dataset(data_response)
     except requests.exceptions.RequestException as err:
         logger.error(f'Error fetching csv: {err}')
+
 
 if __name__=='__main__':
     get_submissions()
