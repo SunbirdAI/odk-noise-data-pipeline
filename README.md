@@ -10,3 +10,4 @@ This project uses the [ODK Central API](https://odkcentral.docs.apiary.io/#intro
 - Create and run a virtual environment: `python3 -m virtualenv venv`, then `source venv/bin/activate`
 - Create a `.env` file in the project root and fill in the environment variables as shown in the provided `env.example` file
 - Run the script: `python bulk_odk_download.py`. The script downloads the ODK data and creates a `data` folder for it in the root folder of the project
+- The data is in a zipped folder that contains a media folder for the audio files as well as a csv file containing the related metadata

@@ -10,18 +10,21 @@ venv/
 # pycache
 __pycache__/
 
+# logs
+*.log
+
 # audio files
 audio/
 *.wav
 
-# logs
-*.log
+# zipped data folder
+*.zip
 
 # csv files
-/*.csv
+*.csv
 
 # data files
-data/
+media/
 
 # notebooks
 .ipynb_checkpoints
