@@ -20,31 +20,29 @@ STRING_CLASSES = [
     "car-OR-truck",
     "Mobile-music",
 ]  # TODO: Make this all string classes.
+NOISE_CLASS_COLUMNS = [
+    "Noise-Noise_Source",
+    "Noise-Noise_Source_2",
+    "Noise-Noise_Source_3"
+]
 
 meta_data = pd.read_csv(META_FILE)
 original_len = len(meta_data)
 
-# Remove rows with string classes
-meta_data = meta_data[
-    ~meta_data["Noise-Noise_Source"].isin(STRING_CLASSES)
-]  # Cleaning based only on primary class
-
-# Convert class labels to numeric
-meta_data["Noise-Noise_Source"] = (
-    pd.to_numeric(meta_data["Noise-Noise_Source"], errors="coerce")
-    .fillna(0)
-    .astype(np.int64)
-)
-meta_data["Noise-Noise_Source_2"] = (
-    pd.to_numeric(meta_data["Noise-Noise_Source_2"], errors="coerce")
-    .fillna(0)
-    .astype(np.int64)
-)
-meta_data["Noise-Noise_Source_3"] = (
-    pd.to_numeric(meta_data["Noise-Noise_Source_3"], errors="coerce")
-    .fillna(0)
-    .astype(np.int64)
-)
+# Cleaning of column types and names
+for column in NOISE_CLASS_COLUMNS:
+    # Remove rows with string classes
+    meta_data = meta_data[
+        ~meta_data[column].isin(STRING_CLASSES)
+    ]
+    # Convert class labels to numeric and fill in null values
+    meta_data[column] = (
+        pd.to_numeric(meta_data[column], errors="coerce")
+        .fillna(999)
+        .astype(np.int64)
+    )
+    # Convert the category 'Other' from class id 19 to class id 0
+    meta_data.loc[meta_data[column] == 19] = 0
 
 # Create subset of metadata file with corresponding audio wav
 # files in the de-duplicated folder.
