@@ -1,3 +1,4 @@
+
 # env file
 .env
 
@@ -17,14 +18,17 @@ __pycache__/
 audio/
 *.wav
 
-# zipped data folder
+# zipped data folder and archives
 *.zip
+*.xz
 
-# csv files
+# csv and txt files
 *.csv
+*.txt
 
 # data files
 media/
+*.aac
 
 # notebooks
 .ipynb_checkpoints
