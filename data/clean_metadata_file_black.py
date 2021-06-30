@@ -1,10 +1,16 @@
 """
 Clean up data collection csv file.
 Errors noticed:
-1. The classes are not numeric, I think this came over from the previous
+1. The classes are not numeric, which came over from the previous
    data uploaded e.g. 'Other', 'car-OR-truck', etc.
 2. The classes are not of the same data type, some are strings e.g.
    '11', others are numeric.
+3. The class ids do not start at 0. Instead they start at 1 and end at 19, 
+    with class 'Other' being 19
+4. There is test data included in the csv (data with the 'Noise-Comment' as
+    something similar to 'Test')
+5. Some media files are duplicated and should no longer appear in the
+    csv file after deduplication has been done
 
 If you notice any other errors update this file.
 """
@@ -19,7 +25,7 @@ STRING_CLASSES = [
     "Other",
     "car-OR-truck",
     "Mobile-music",
-]  # TODO: Make this all string classes.
+]
 NOISE_CLASS_COLUMNS = [
     "Noise-Noise_Source",
     "Noise-Noise_Source_2",
