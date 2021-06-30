@@ -50,8 +50,8 @@ for column in NOISE_CLASS_COLUMNS:
     # Convert the category 'Other' from class id 19 to class id 0
     meta_data.loc[meta_data[column] == 19, column] = 0
 
-# Clean out test data ("Test" comments in the Noise_Comment folder)
-meta_data = meta_data[meta_data["Noise-Comment"].str.contains("Test", regex=True) == False]
+# Remove test data (data with "Test" comments in the Noise_Comment column)
+meta_data = meta_data[meta_data["Noise-Comment"].str.contains("Test", na=False, regex=True) == False]
 
 # Create subset of metadata file with corresponding audio wav
 # files in the de-duplicated folder.
