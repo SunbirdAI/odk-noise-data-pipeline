@@ -58,6 +58,10 @@ meta_data = meta_data[meta_data["Noise-Comment"].str.contains("Test", na=False, 
 audio_files = [str(f.name) for f in BASE_DIR.glob("*.wav")]
 audio_meta_data = meta_data[meta_data["Noise-audio"].isin(audio_files)]
 
+final_audio_files = audio_meta_data["Noise-audio"]
+final_audio_files.to_csv("final_files.txt", header=None, index=None, sep="\t", mode="a")
+print(f"Final number of audio files: {len(final_audio_files)}")
+
 audio_meta_data.to_csv("noise_metadata.csv", index=False)
 
 print(
