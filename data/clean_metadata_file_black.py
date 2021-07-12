@@ -58,6 +58,9 @@ meta_data = meta_data[meta_data["Noise-Comment"].str.contains("Test", na=False, 
 audio_files = [str(f.name) for f in BASE_DIR.glob("*.wav")]
 audio_meta_data = meta_data[meta_data["Noise-audio"].isin(audio_files)]
 
+# Remove duplicated audio file names
+audio_meta_data.drop_duplicates(subset=["Noise-audio"], inplace=True)
+
 audio_meta_data.to_csv("noise_metadata.csv", index=False)
 
 print(
